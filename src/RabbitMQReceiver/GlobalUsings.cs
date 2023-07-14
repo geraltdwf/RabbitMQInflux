@@ -1,3 +1,9 @@
 global using System.Text;
 global using RabbitMQ.Client;
 global using RabbitMQ.Client.Events;
+global using RabbitMQReceiver;
+global using RabbitMQReceiver.Services;
+global using InfluxDB.Client;
+global using InfluxDB.Client.Api.Domain;
+global using InfluxDB.Client.Core;
+global using InfluxDB.Client.Writes;
