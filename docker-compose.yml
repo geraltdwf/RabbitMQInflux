@@ -1,32 +1,32 @@
 version: '3.1'
 services:
   rabbitmq:
-    image: rabbitmq:3-latest
+    image: rabbitmq:3-management
     ports:
       - 5672:5672
       - 15672:15672
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
-#  rabbitmq-publisher:
-#    build:
-#      context: ./src/RabbitMQPublisher
-#    depends_on:
-#      - rabbitmq
-#  rabbitmq-receiver:
-#    build:
-#      context: ./src/RabbitMQReceiver
-#    depends_on:
-#      - rabbitmq
-#  influxdb:
-#    image: influxdb:latest
-#    ports:
-#      - 8086:8086
-#    volumes:
-#      - influxdb-storage:/var/lib/influxdb
-#  redis:
-#    image: redis:latest
-#    ports:
-#      - 6379:6379
-#volumes:
-#  influxdb-storage:
+  rabbitmq-publisher:
+    build:
+      context: ./src/RabbitMQPublisher
+    depends_on:
+      - rabbitmq
+  rabbitmq-receiver:
+    build:
+      context: ./src/RabbitMQReceiver
+    depends_on:
+      - rabbitmq
+  influxdb:
+    image: influxdb:latest
+    ports:
+      - 8086:8086
+    volumes:
+      - influxdb-storage:/var/lib/influxdb
+  redis:
+    image: redis:latest
+    ports:
+      - 6390:6390
+volumes:
+  influxdb-storage:
