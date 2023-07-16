@@ -7,6 +7,7 @@ public class RabbitMQConsumer
     private IModel _channel;
     private EventingBasicConsumer _consumer;
     private InfluxDbPublisherService _influxDbPublisherService;
+    public bool isOpen => _channel.IsOpen;
 
     public RabbitMQConsumer(string hostname, InfluxDbPublisherService influxDbPublisherService)
     {

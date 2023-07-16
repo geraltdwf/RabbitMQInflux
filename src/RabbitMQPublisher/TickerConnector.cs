@@ -7,6 +7,7 @@ public class TickerConnector
     private IConnection _connection;
     private IModel _channel;
     private int _ticks;
+    public bool isOpen => _channel.IsOpen;
 
     public TickerConnector(string hostname, int ticks)
     {
