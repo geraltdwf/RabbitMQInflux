@@ -1,6 +1,7 @@
 ﻿bool isConnected = false;
 while (!isConnected)
 {
+    Thread.Sleep(1000);
     try
     {
         TickerConnector connector = new TickerConnector("rabbitmq", 10);

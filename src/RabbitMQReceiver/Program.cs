@@ -2,6 +2,7 @@
 bool isConnected = false;
 while (!isConnected)
 {
+    Thread.Sleep(1000);
     try
     {
         RabbitMQConsumer consumer = new RabbitMQConsumer("rabbitmq", service);
