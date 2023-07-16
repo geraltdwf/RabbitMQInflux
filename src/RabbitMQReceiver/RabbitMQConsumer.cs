@@ -17,18 +17,34 @@ public class RabbitMQConsumer
     
     public void Start()
     {
+        // _connection = _factory.CreateConnection();
+        // _channel = _connection.CreateModel();
+        // _channel.QueueDeclare(queue: "hello",
+        //     durable: false,
+        //     exclusive: false,
+        //     autoDelete: false,
+        //     arguments: null);
+        // _consumer = new EventingBasicConsumer(_channel);
+        // _consumer.Received += ConsumerOnReceived;
+        // _channel.BasicConsume(queue: "hello",
+        //     autoAck: true,
+        //     consumer: _consumer);
+            
         _connection = _factory.CreateConnection();
         _channel = _connection.CreateModel();
-        _channel.QueueDeclare(queue: "hello",
-            durable: false,
-            exclusive: false,
-            autoDelete: false,
-            arguments: null);
+        
+        // Declare an exchange
+        _channel.ExchangeDeclare(exchange: "my_exchange", type: ExchangeType.Direct);
+        
+        // Create a new queue and bind it to the exchange
+        var queueName = _channel.QueueDeclare().QueueName;
+        _channel.QueueBind(queue: queueName, exchange: "my_exchange", routingKey: "");
+        
         _consumer = new EventingBasicConsumer(_channel);
         _consumer.Received += ConsumerOnReceived;
-        _channel.BasicConsume(queue: "hello",
-            autoAck: true,
-            consumer: _consumer);
+        
+        // Start consuming messages from the queue
+        _channel.BasicConsume(queue: queueName, autoAck: true, consumer: _consumer);
     }
 
     public void Stop()

@@ -1,11 +1,12 @@
 ﻿InfluxDbPublisherService service = new InfluxDbPublisherService();
+RabbitMQConsumer consumer;
 bool isConnected = false;
 while (!isConnected)
 {
     Thread.Sleep(1000);
     try
     {
-        RabbitMQConsumer consumer = new RabbitMQConsumer("rabbitmq", service);
+        consumer = new RabbitMQConsumer("rabbitmq", service);
         consumer.Start();
 
         if (consumer.isOpen)
