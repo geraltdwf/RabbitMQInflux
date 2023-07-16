@@ -8,6 +8,8 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+    cap_add:
+      - ALL
   rabbitmq-publisher:
     build:
       context: ./src/RabbitMQPublisher
